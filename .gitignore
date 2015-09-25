@@ -46,3 +46,5 @@ Thumbs.db
 # -------------[ Build ]------------------------ #
 *.html
 *.unity3d
+money_project/Assets/Script/TeamProject.sublime-project
+money_project/Assets/Script/TeamProject.sublime-project.meta

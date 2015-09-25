@@ -43,10 +43,11 @@ var m500BasePosition : Vector3 ;//= Vector3(-5.0,0,0);
 var m1000BasePosition : Vector3 ;//= Vector3(-10.0,0,0);
 var m5000BasePosition : Vector3 ;//= Vector3(-15.0,0,0);
 var m10000BasePosition : Vector3 ;//= Vector3(-20.0,0,0);
-private var money_pos = [m1BasePosition, m5BasePosition, m10BasePosition, m50BasePosition, m100BasePosition, m500BasePosition, m1000BasePosition, m5000BasePosition, m1000BasePosition];
+private var money_pos_list = new List.<Vector3>();
 
 // 所有金額
-// private var mnArray = new Array (2,1,2,1,2,1,2,1,7); //77777  1円　5円...
+// private var mnArray = new Array (2,1,2,1,2,1,2,1,7);
+// 77777  1円　5円...
 private var hold_money : int;
 private var hold_money_list = new List.<int>();
 
@@ -101,11 +102,22 @@ function Start () {
     money_list.Add(m5000_list);
     money_list.Add(m10000_list);
 
+    // お金の位置情報をリスト化
+    money_pos_list.Add(m1BasePosition);
+    money_pos_list.Add(m5BasePosition);
+    money_pos_list.Add(m10BasePosition);
+    money_pos_list.Add(m50BasePosition);
+    money_pos_list.Add(m100BasePosition);
+    money_pos_list.Add(m500BasePosition);
+    money_pos_list.Add(m1000BasePosition);
+    money_pos_list.Add(m5000BasePosition);
+    money_pos_list.Add(m10000BasePosition);
+
     // 所有金額分のお金を作成
-    hold_money = 12345;
+    hold_money = 27777;
     calcMoneyNum();
     for (var i = 0; i < hold_money_list.Count; i++) {
-        CreateMoney(money_obj[i], hold_money_list[i], money_pos[i], money_list[i]);
+        CreateMoney(money_obj[i], hold_money_list[i], money_pos_list[i], money_list[i]);
     }
 }
 
