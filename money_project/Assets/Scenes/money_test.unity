@@ -254,6 +254,7 @@ MonoBehaviour:
   m1000: {fileID: 129472, guid: 6c0b8e8b77d6d435f99eba3371614b12, type: 2}
   m5000: {fileID: 155442, guid: 8cc56d2311ed343f6a1313a6154e3f51, type: 2}
   m10000: {fileID: 157234, guid: 1105cb3c2f02c4336af65cffed687253, type: 2}
+  initialSpeed: .5
   m1BasePosition: {x: 20, y: 0, z: 0}
   m5BasePosition: {x: 15, y: 0, z: 0}
   m10BasePosition: {x: 10, y: 0, z: 0}
@@ -263,6 +264,8 @@ MonoBehaviour:
   m1000BasePosition: {x: -10, y: 0, z: 0}
   m5000BasePosition: {x: -15, y: 0, z: 0}
   m10000BasePosition: {x: -20, y: 0, z: 0}
+  cashierPosition: {x: 0, y: 0, z: -15}
+  cashierMovePosition: {x: 0, y: 0, z: 3}
 --- !u!1 &2067730229
 GameObject:
   m_ObjectHideFlags: 0
