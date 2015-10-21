@@ -12,6 +12,7 @@ GameObject:
   - 136: {fileID: 13629300}
   - 23: {fileID: 2343046}
   - 54: {fileID: 5405726}
+  - 114: {fileID: 11439462}
   m_Layer: 0
   m_Name: 10yen
   m_TagString: Untagged
@@ -76,7 +77,19 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
+--- !u!114 &11439462
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6ad8985e752a848b806cd0d02c9422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExpEffect: {fileID: 142062, guid: 88395685557d796438755cbf268ad508, type: 2}
 --- !u!136 &13629300
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -113,6 +126,22 @@ Prefab:
       propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ExpEffect
+      value: 
+      objectReference: {fileID: 142062, guid: 88395685557d796438755cbf268ad508, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 139136}
