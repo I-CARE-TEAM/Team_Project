@@ -37,9 +37,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
---- !u!127 &3
-LevelGameManager:
-  m_ObjectHideFlags: 0
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -68,6 +65,7 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &5
@@ -349,9 +347,9 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
-  m1: {fileID: 139136, guid: 7e652c231c12bcf4399ab8a87be7789e, type: 2}
+  m1: {fileID: 163448, guid: 7e2a3db64138f4dbbb431f0bb11926e5, type: 2}
   m5: {fileID: 139136, guid: 6d6e8a646feca1b459a6772dc07b7ee9, type: 2}
-  m10: {fileID: 139136, guid: 9547b49e6ceafcc45944394fd1d518a3, type: 2}
+  m10: {fileID: 138196, guid: 9547b49e6ceafcc45944394fd1d518a3, type: 2}
   m50: {fileID: 139136, guid: 289b9396f435dd243a0af15b376de01f, type: 2}
   m100: {fileID: 139136, guid: a60cce6e827d240ae953e32989c835f8, type: 2}
   m500: {fileID: 147932, guid: 988c63557a4e546eab839fe62d6a867d, type: 2}
@@ -497,6 +495,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10

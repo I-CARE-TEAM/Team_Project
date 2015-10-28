@@ -205,15 +205,15 @@ function Start () {
 
     // 所有金額分のお金を作成
     hold_money = 68888;
-	
+
 	/*if(EventType == 1){*/
 		//消費金額
 		expenditure = 12345;
 		hold_money -= expenditure;
-	
+
 		calcExpMoneyNum();
 		calcMoneyNum();
-	
+
 		for (var i = 0; i < hold_money_list.Count; i++) {
 			CreateMoney(money_obj[i], hold_money_list[i], money_pos_list[i], money_list[i]);
 		}
@@ -241,11 +241,11 @@ function Start () {
 			CreateMoney(money_obj[k], hold_money_list[k], money_pos_list[k], money_list[k]);
 		}
 	}*/
-	
+
 }
 
 function Update () {
-	
+
 	/*if(EventType == 1)*/
 		expMoneyMove();
 	/*else if(EventType == 1){
@@ -260,7 +260,7 @@ function Update () {
 				}
 			}
 
-		hold_money += charge_money;	
+		hold_money += charge_money;
 		calcMoneyNum();
 
 		for (i = 0; i < hold_money_list.Count; i++) {
@@ -271,7 +271,7 @@ function Update () {
 	//OnCollisionEnterが使えるまでに、替わりの判断
 	/*if (expMoney_list[0].transform.position.z < -15){
 		for(var i = 0;i < expMoney_list.Count; i++){
-			
+
 				Destroy(expMoney_list[i]);
 		}
 	}*/
