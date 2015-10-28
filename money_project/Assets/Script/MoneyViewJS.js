@@ -34,12 +34,7 @@ private var money_list = new List.<List.<GameObject> >();
 private var chargeMoney_list = new List.<GameObject>();
 private var expMoney_list = new List.<GameObject>();
 
-// 位置
-private var SpacingForY : float = 1.0;
-private var SpacingForZ : float = 0.5;
 
-public var initialSpeed : float;		//移動速度
-var EventType :int = 1; //１消費　　２チャージ　　３残高
 
 var m1BasePosition : Vector3 ;//= Vector3(20.0,0,0);
 var m5BasePosition : Vector3 ;//= Vector3(15.0,0,0);
@@ -64,6 +59,12 @@ private var expenditure : int;			//消費金額
 private var expenditure_list = new List.<int>();
 private var charge_money : int;			//チャージ金額
 private var charge_money_list = new List.<int>();
+// 位置
+private var SpacingForY : float = 1.0;
+private var SpacingForZ : float = 0.5;
+
+public var initialSpeed : float;		//移動速度
+private var eventType :int ; //１消費　　２チャージ　　３残高
 
 // チャージ金額から枚数を計算
 function calcChargeMoneyNum() {
@@ -126,7 +127,7 @@ function CreateMoney (money_pre:GameObject, amount:int, pos:Vector3, store_list:
 //チャージ金額のお金作成、作成位置は調整する必要がある
 function CreateChargeMoney (money_pre:GameObject, amount:int, pos:Vector3, store_list:List.<GameObject>) {
     for (var i = 0; i < amount; i++) {
-        var newMoney : GameObject = Instantiate (money_pre, Vector3(pos.x,pos.y +(money_pre.transform.localScale.y+SpacingForY)*i,pos.z+SpacingForZ*i-10), transform.rotation) as GameObject;
+        var newMoney : GameObject = Instantiate (money_pre, Vector3(pos.x,pos.y +(money_pre.transform.localScale.y+SpacingForY)*i,pos.z+SpacingForZ*i-13), transform.rotation) as GameObject;
         chargeMoney_list.Add(newMoney);
 		store_list.Add(newMoney);
         newMoney.transform.parent = GameObject.Find("MoneyObject").transform;
@@ -158,15 +159,15 @@ function calcMoneyNum() {
 
 // 料金表示
 function OnGUI() {
-	/*if(EventType == 1){*/
+	if(eventType == 1){
 		GUI.Label(Rect(10,10,100,30), "消費金額:" + expenditure, ST);
 		GUI.Label(Rect(10,25,100,30), "残高:" + hold_money, ST);
-	/*else if(EventType == 2){
+	}else if(eventType == 2){
 		GUI.Label(Rect(10,10,100,30), "チャージ金額:" + charge_money, ST);
 		GUI.Label(Rect(10,25,100,30), "残高:" + hold_money, ST);
-	}else if(EventType == 3){
+	}else if(eventType == 3){
 		GUI.Label(Rect(10,25,100,30), "残高:" + hold_money, ST);
-	}*/
+	}
 }
 
 function Start () {
@@ -203,10 +204,11 @@ function Start () {
     money_pos_list.Add(m5000BasePosition);
     money_pos_list.Add(m10000BasePosition);
 
+	eventType = 1;
     // 所有金額分のお金を作成
     hold_money = 68888;
 
-	/*if(EventType == 1){*/
+	if(eventType == 1){
 		//消費金額
 		expenditure = 12345;
 		hold_money -= expenditure;
@@ -221,8 +223,8 @@ function Start () {
 		for (var z = 0; z < expenditure_list.Count; z++) {
 			CreateExpMoney(money_obj[z], expenditure_list[z], money_pos_list[z], money_list[z]);
 		}
-	/*}
-	else if(EventType == 2){
+	}
+	else if(eventType == 2){
 		//チャージ金額分のお金を作成
 		charge_money = 68888;
 		calcChargeMoneyNum();
@@ -235,24 +237,24 @@ function Start () {
 			CreateChargeMoney(money_obj[j], charge_money_list[j], money_pos_list[j], money_list[j]);
 		}
 	}
-	else if(EventType == 3){
+	else if(eventType == 3){
 		calcMoneyNum();
 		for (var k = 0; k < hold_money_list.Count; k++) {
 			CreateMoney(money_obj[k], hold_money_list[k], money_pos_list[k], money_list[k]);
 		}
-	}*/
+	}
 
 }
 
 function Update () {
 
-	/*if(EventType == 1)*/
+	if(eventType == 1)
 		expMoneyMove();
-	/*else if(EventType == 1){
+	else if(eventType == 2){
 		if (chargeMoney_list[0].transform.position.z<0)
 			chargeMoneyMove();
 		//OnCollisionEnterが使えるまでに、替わりの判断
-		if (chargeMoney_list[0].transform.position.z>0){
+		if (chargeMoney_list[0].transform.position.z>8){
 			for(var i = 0;i < money_list.Count; i++){
 				for(var j = 0;j < money_list[i].Count; j++)
 				{
@@ -267,7 +269,7 @@ function Update () {
 			CreateMoney(money_obj[i], hold_money_list[i], money_pos_list[i], money_list[i]);
 		}
 	}
-	}*/
+	}
 	//OnCollisionEnterが使えるまでに、替わりの判断
 	/*if (expMoney_list[0].transform.position.z < -15){
 		for(var i = 0;i < expMoney_list.Count; i++){
