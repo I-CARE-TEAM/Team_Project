@@ -254,15 +254,18 @@ MonoBehaviour:
   m1000: {fileID: 129472, guid: 6c0b8e8b77d6d435f99eba3371614b12, type: 2}
   m5000: {fileID: 155442, guid: 8cc56d2311ed343f6a1313a6154e3f51, type: 2}
   m10000: {fileID: 157234, guid: 1105cb3c2f02c4336af65cffed687253, type: 2}
-  m1BasePosition: {x: 0, y: 0, z: 0}
-  m5BasePosition: {x: 0, y: 0, z: 0}
-  m10BasePosition: {x: 0, y: 0, z: 0}
-  m50BasePosition: {x: 0, y: 0, z: 0}
+  initialSpeed: .5
+  m1BasePosition: {x: 20, y: 0, z: 0}
+  m5BasePosition: {x: 15, y: 0, z: 0}
+  m10BasePosition: {x: 10, y: 0, z: 0}
+  m50BasePosition: {x: 5, y: 0, z: 0}
   m100BasePosition: {x: 0, y: 0, z: 0}
-  m500BasePosition: {x: 0, y: 0, z: 0}
-  m1000BasePosition: {x: 0, y: 0, z: 0}
-  m5000BasePosition: {x: 0, y: 0, z: 0}
-  m10000BasePosition: {x: 0, y: 0, z: 0}
+  m500BasePosition: {x: -5, y: 0, z: 0}
+  m1000BasePosition: {x: -10, y: 0, z: 0}
+  m5000BasePosition: {x: -15, y: 0, z: 0}
+  m10000BasePosition: {x: -20, y: 0, z: 0}
+  cashierPosition: {x: 0, y: 0, z: -15}
+  cashierMovePosition: {x: 0, y: 0, z: 3}
 --- !u!1 &2067730229
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,8 +345,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2067730229}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -1.15202326e-07, y: .707106709, z: -.707106829, w: -1.15202312e-07}
+  m_LocalPosition: {x: 0, y: 30, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
