@@ -189,7 +189,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9b92f05ba97d54e41aa6b91c89a4bae7, type: 2}
+  - {fileID: 2100000, guid: 17725c967c15f7b4ea185b5eadcb9a4a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -347,6 +347,8 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  chargeEffect: {fileID: 188728, guid: 5ead5aa11a52a7f4da602d04a4ad9bdd, type: 2}
+  omedetou: {fileID: 121316, guid: b7ba2eeb30ddc85499893983770b445f, type: 2}
   m1: {fileID: 163448, guid: 7e2a3db64138f4dbbb431f0bb11926e5, type: 2}
   m5: {fileID: 139136, guid: 6d6e8a646feca1b459a6772dc07b7ee9, type: 2}
   m10: {fileID: 138196, guid: 9547b49e6ceafcc45944394fd1d518a3, type: 2}
@@ -356,19 +358,18 @@ MonoBehaviour:
   m1000: {fileID: 129472, guid: 6c0b8e8b77d6d435f99eba3371614b12, type: 2}
   m5000: {fileID: 155442, guid: 8cc56d2311ed343f6a1313a6154e3f51, type: 2}
   m10000: {fileID: 157234, guid: 1105cb3c2f02c4336af65cffed687253, type: 2}
-  initialSpeed: 1
-  EventType: 1
-  m1BasePosition: {x: 20, y: 0, z: 0}
-  m5BasePosition: {x: 17, y: 0, z: 0}
-  m10BasePosition: {x: 14, y: 0, z: 0}
-  m50BasePosition: {x: 11, y: 0, z: 0}
-  m100BasePosition: {x: 8, y: 0, z: 0}
-  m500BasePosition: {x: 5, y: 0, z: 0}
-  m1000BasePosition: {x: -3, y: 0, z: 0}
-  m5000BasePosition: {x: -11, y: 0, z: 0}
-  m10000BasePosition: {x: -19, y: 0, z: 0}
+  m1BasePosition: {x: 20, y: 0, z: 8}
+  m5BasePosition: {x: 17, y: 0, z: 8}
+  m10BasePosition: {x: 14, y: 0, z: 8}
+  m50BasePosition: {x: 11, y: 0, z: 8}
+  m100BasePosition: {x: 8, y: 0, z: 8}
+  m500BasePosition: {x: 5, y: 0, z: 8}
+  m1000BasePosition: {x: -3, y: 0, z: 8}
+  m5000BasePosition: {x: -11, y: 0, z: 8}
+  m10000BasePosition: {x: -19, y: 0, z: 8}
   cashierPosition: {x: 0, y: 0, z: -15}
-  cashierMovePosition: {x: 0, y: 0, z: -3}
+  cashierMovePosition: {x: 0, y: 0, z: 6}
+  initialSpeed: 1
 --- !u!1001 &1997488568
 Prefab:
   m_ObjectHideFlags: 0
@@ -424,6 +425,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2376150, guid: 185f00100c576c94e8eac5255f2756e0, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e1aae35f43cf365409b66e1326ade8bd, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 185f00100c576c94e8eac5255f2756e0, type: 2}
   m_IsPrefabParent: 0
