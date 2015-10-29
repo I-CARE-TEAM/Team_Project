@@ -35,7 +35,7 @@ private var chargeMoney_list = new List.<GameObject>();
 private var expMoney_list = new List.<GameObject>();
 
 public var initialSpeed : float;		//移動速度
-var eventType :int = 1; //１消費　　２チャージ　　３残高
+var EventType :int = 2; //１消費　　２チャージ　　３残高
 
 var m1BasePosition : Vector3 ;//= Vector3(20.0,0,0);
 var m5BasePosition : Vector3 ;//= Vector3(15.0,0,0);
@@ -63,6 +63,9 @@ private var charge_money_list = new List.<int>();
 // 位置
 private var SpacingForY : float = 1.0;
 private var SpacingForZ : float = 0.5;
+
+public var initialSpeed : float;		//移動速度
+private var eventType :int ; //１消費　　２チャージ　　３残高
 
 // チャージ金額から枚数を計算
 function calcChargeMoneyNum() {
@@ -96,7 +99,6 @@ function calcExpMoneyNum() {
 function chargeMoneyMove(){
 	var direction : Vector3 = cashierMovePosition;
 	for(var i = 0; i < chargeMoney_list.Count; i++){
-		if (chargeMoney_list[i] == null) break;
 		direction = cashierMovePosition;
 		direction -= chargeMoney_list[i].transform.position;
 		chargeMoney_list[i].GetComponent.<Rigidbody>().velocity = direction*initialSpeed;
@@ -113,6 +115,7 @@ function expMoneyMove(){
 		expMoney_list[i].GetComponent.<Rigidbody>().velocity = direction*initialSpeed;
 	}
 }
+
 
 // 残高のお金作成
 function CreateMoney (money_pre:GameObject, amount:int, pos:Vector3, store_list:List.<GameObject>) {
@@ -203,7 +206,7 @@ function Start () {
     money_pos_list.Add(m5000BasePosition);
     money_pos_list.Add(m10000BasePosition);
 
-	eventType = 2;
+	eventType = 1;
     // 所有金額分のお金を作成
     hold_money = 68888;
 
@@ -245,11 +248,11 @@ function Start () {
 
 }
 
-function Update ()
-{
+function Update () {
+
 	if(eventType == 1)
 		expMoneyMove();
-	else if(eventType == 2 && chargeMoney_list[0] != null){
+	else if(eventType == 2){
 		if (chargeMoney_list[0].transform.position.z<0)
 			chargeMoneyMove();
 		//OnCollisionEnterが使えるまでに、替わりの判断
@@ -284,4 +287,4 @@ function OnCollisionEnter(){
 			Destroy(expMoney_list[i]);
 		}
 		*/
-}
+	}

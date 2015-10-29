@@ -3,7 +3,6 @@
 public var ExpEffect : GameObject;
 
 function Start () {
-
 }
 
 function Update () {
@@ -12,8 +11,6 @@ function Update () {
 }
 
 function OnCollisionEnter(obj : Collision){
-	// if(obj.gameObject.name == "cashier"){
-		Instantiate(ExpEffect,transform.position,transform.rotation);
-		Destroy(gameObject);
-	// }
+	Instantiate(ExpEffect,transform.position,transform.rotation);
+	Destroy(gameObject);
 }

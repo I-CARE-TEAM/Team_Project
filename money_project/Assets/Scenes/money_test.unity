@@ -357,7 +357,7 @@ MonoBehaviour:
   m5000: {fileID: 155442, guid: 8cc56d2311ed343f6a1313a6154e3f51, type: 2}
   m10000: {fileID: 157234, guid: 1105cb3c2f02c4336af65cffed687253, type: 2}
   initialSpeed: 1
-  EventType: 2
+  EventType: 1
   m1BasePosition: {x: 20, y: 0, z: 0}
   m5BasePosition: {x: 17, y: 0, z: 0}
   m10BasePosition: {x: 14, y: 0, z: 0}
