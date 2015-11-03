@@ -59,9 +59,10 @@ private var SpacingForZ : float = 0.5;
 
 public var initialSpeed : float;    //移動速度
 private var eventType : int; //１消費　　２チャージ　　３残高
+private var check : boolean;  // お金作成完了フラグ
 
 // リスト化
-function init() {
+function init () {
     // オブジェクトをリスト化
     money_obj.Add(m1);
     money_obj.Add(m5);
@@ -86,7 +87,7 @@ function init() {
 }
 
 // 金額から枚数を計算：計算したい金額, 計算結果を入れるリスト
-function calcMoneyNum(money:int, result_money_list:List.<int>) {
+function calcMoneyNum (money:int, result_money_list:List.<int>) {
     var num_div : int;
     var num_rem : int;
     var money_ : int = money;
@@ -101,7 +102,7 @@ function calcMoneyNum(money:int, result_money_list:List.<int>) {
 }
 
 // お金の移動：位置, 移動するお金のリスト
-function moneyMove(pos:Vector3, move_list:List.<GameObject>) {
+function moneyMove (pos:Vector3, move_list:List.<GameObject>) {
     var direction : Vector3 = pos;
     yield WaitForSeconds(1);
     for(var i = 0; i < move_list.Count; i++){
@@ -114,16 +115,31 @@ function moneyMove(pos:Vector3, move_list:List.<GameObject>) {
 
 // お金作成：作成するお金の種類, 数, 位置, 格納するリスト
 function CreateMoney (money_pre:GameObject, amount:int, pos:Vector3, store_list:List.<GameObject>) {
+    store_list.Clear();
     for (var i = 0; i < amount; i++) {
         yield WaitForSeconds(0.2);
         var newMoney : GameObject = Instantiate (money_pre, Vector3(pos.x,pos.y+money_pre.transform.localScale.y*i,pos.z+SpacingForZ*i), transform.rotation) as GameObject;
+        switch(store_list) {
+            case holdMoney_list:
+            newMoney.layer = LayerMask.NameToLayer("HoldMoney");
+            newMoney.transform.parent = GameObject.Find("HoldMoney").transform;
+            break;
+            case chargeMoney_list:
+            newMoney.layer = LayerMask.NameToLayer("ChargeMoney");
+            newMoney.transform.parent = GameObject.Find("ChargeMoney").transform;
+            break;
+            case expMoney_list:
+            newMoney.layer = LayerMask.NameToLayer("ExpMoney");
+            newMoney.transform.parent = GameObject.Find("ExpMoney").transform;
+            break;
+            default: break;
+        }
         store_list.Add(newMoney);
-        newMoney.transform.parent = GameObject.Find("MoneyObject").transform;
     }
 }
 
 // 複数のお金を作成：作成する金額, 作成したものを格納するリスト
-function CreateMultiMoney(create_list:List.<int>, multi_money_list:List.<GameObject>) {
+function CreateMultiMoney (create_list:List.<int>, multi_money_list:List.<GameObject>) {
     multi_money_list.Clear();
     for (var i = 0; i < create_list.Count; i++) {
         CreateMoney(money_obj[i], create_list[i], money_pos_list[i], multi_money_list);
@@ -131,11 +147,11 @@ function CreateMultiMoney(create_list:List.<int>, multi_money_list:List.<GameObj
 }
 
 // 複数のお金を作成(作成位置を調整可)
-function CreateMultiMoneyAddPos(create_list:List.<int>, multi_money_list:List.<GameObject>, pos:Vector3) {
+function CreateMultiMoneyAddPos (create_list:List.<int>, multi_money_list:List.<GameObject>, pos:Vector3) {
     multi_money_list.Clear();
     for (var i = 0; i < create_list.Count; i++) {
-        var charge_pos = money_pos_list[i] + pos;
-        CreateMoney(money_obj[i], create_list[i], charge_pos, multi_money_list);
+        var add_pos = money_pos_list[i] + pos;
+        CreateMoney(money_obj[i], create_list[i], add_pos, multi_money_list);
     }
 }
 
@@ -149,15 +165,17 @@ function OnGUI() {
     }
 }
 
+function WaitForIt () {
+    yield WaitForSeconds(1.5f);
+    check = true;
+}
+
 function Start ()
 {
     init();
     eventType = 2;
     hold_money = 68888; // 所有金額分のお金を作成
-
-    // 残高金額
-    calcMoneyNum(hold_money, hold_money_list);
-    CreateMultiMoney(hold_money_list, holdMoney_list);
+    check = false;
 
     if(eventType == 1){
 		expenditure = 12345;  //消費金額
@@ -169,28 +187,35 @@ function Start ()
         calcMoneyNum(charge_money, charge_money_list);
         CreateMultiMoneyAddPos(charge_money_list, chargeMoney_list, new Vector3(0, 20, -13));
     }
+
+    // 残高金額
+    calcMoneyNum(hold_money, hold_money_list);
+    CreateMultiMoney(hold_money_list, holdMoney_list);
+
+    WaitForIt();
 }
 
 function Update ()
 {
-	if(eventType == 1){
-		moneyMove(cashierPosition, expMoney_list);
-	}else if(eventType == 2 && chargeMoney_list.Count != 0){
-		if (chargeMoney_list[0].transform.position.z<0)
-			moneyMove(cashierMovePosition, chargeMoney_list);
+    if (check) {
+        if(eventType == 1){
+            moneyMove(cashierPosition, expMoney_list);
+            if (GameObject.Find("ExpMoney").transform.childCount == 0) {
+                check = false;
+            }
+        }else if(eventType == 2){
+            moneyMove(cashierMovePosition, chargeMoney_list);
 
-		//OnCollisionEnterが使えるまでに、替わりの判断
-		if (chargeMoney_list[0].transform.position.z>4){
-            for (var i = 0; i < holdMoney_list.Count; i++)
-                Instantiate(chargeEffect,m500BasePosition,transform.rotation);
-            holdMoney_list.Clear();
-            chargeMoney_list.Clear();
-
-            hold_money += charge_money;
-            charge_money = 0;
-            calcMoneyNum(hold_money, hold_money_list);
-            CreateMultiMoney(hold_money_list, holdMoney_list);
-            Instantiate(omedetou,m500BasePosition,transform.rotation);
+            if (GameObject.Find("ChargeMoney").transform.childCount == 0) {
+                for (var obj in holdMoney_list) Destroy(obj);
+                hold_money += charge_money;
+                charge_money = 0;
+                calcMoneyNum(hold_money, hold_money_list);
+                CreateMultiMoney(hold_money_list, holdMoney_list);
+                var omedetouEffect : GameObject = Instantiate(omedetou,m500BasePosition,transform.rotation);
+                Destroy(omedetouEffect, 3);
+                check = false;
+            }
         }
     }
 }

@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExpEffect: {fileID: 142062, guid: 88395685557d796438755cbf268ad508, type: 2}
+  ChargeEffect: {fileID: 188728, guid: 5ead5aa11a52a7f4da602d04a4ad9bdd, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -153,6 +154,10 @@ Prefab:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ChargeEffect
+      value: 
+      objectReference: {fileID: 188728, guid: 5ead5aa11a52a7f4da602d04a4ad9bdd, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 139136}

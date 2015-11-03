@@ -1,6 +1,7 @@
 ﻿#pragma strict
 
 public var ExpEffect : GameObject;
+public var ChargeEffect : GameObject;
 
 function Start () {
 }
@@ -10,7 +11,16 @@ function Update () {
 		Destroy(gameObject);
 }
 
-function OnCollisionEnter(obj : Collision){
-	Instantiate(ExpEffect,transform.position,transform.rotation);
-	Destroy(gameObject);
+function OnCollisionEnter(coll : Collision){
+    switch(coll.collider.gameObject.layer) {
+        // ChargeMoneyオブジェクトを削除
+        // エフェクト作成&削除
+        case LayerMask.NameToLayer("ChargeMoney"):
+        var effect : GameObject = Instantiate(ChargeEffect,transform.position,transform.rotation);
+        Destroy(effect, 3);
+        Destroy(coll.gameObject);
+        break;
+
+        default: break;
+    }
 }
